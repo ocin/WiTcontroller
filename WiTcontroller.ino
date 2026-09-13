@@ -882,7 +882,8 @@ void connectSsid() {
 
       int j = 0;
       int tempTimer = millis();
-      debug_print("Trying Network ... Checking status "); debug_print(cSsid); debug_print(" :"); debug_print(cPassword); debug_println(":");
+      //debug_print("Trying Network ... Checking status "); debug_print(cSsid); debug_print(" :"); debug_print(cPassword); debug_println(":");
+      debug_print("Trying Network ... Checking status "); debug_print(cSsid); debug_print(" :"); debug_print("*********"); debug_println(":");
       while ( (WiFi.status() != WL_CONNECTED) 
             && ((nowTime-startTime) <= SSID_CONNECTION_TIMEOUT) ) { // wait for X seconds to see if the connection worked
         if (millis() > tempTimer + 250) {
@@ -977,7 +978,7 @@ void browseWitService() {
   oledText[1] = selectedSsid;   oledText[2] = MSG_BROWSING_FOR_SERVICE;
   writeOledBattery();
   writeOledArray(false, false, true, true);
-  
+
   startWaitForSelection = millis();
 
   noOfWitServices = 0;
@@ -1011,16 +1012,13 @@ void browseWitService() {
       // foundWitServersIPs[i] = MDNS.IP(i);
       foundWitServersIPs[i] = ESPMDNS_IP_ATTRIBUTE_NAME;
       foundWitServersPorts[i] = MDNS.port(i);
-      // debug_print("txt 0: key: "); debug_print(MDNS.txtKey(i,0)); debug_print(" value: '"); debug_print(MDNS.txt(i,0)); debug_println("'");
-      // debug_print("txt 1: key: "); debug_print(MDNS.txtKey(i,1)); debug_print(" value: '"); debug_print(MDNS.txt(i,1)); debug_println("'");
-      // debug_print("txt 2: key: "); debug_print(MDNS.txtKey(i,2)); debug_print(" value: '"); debug_print(MDNS.txt(i,2)); debug_println("'");
-      // debug_print("txt 3: key: "); debug_print(MDNS.txtKey(i,3)); debug_print(" value: '"); debug_println(MDNS.txt(i,3)); debug_println("'");
+
+      for (int txtnum = 0; txtnum < MDNS.numTxt(i); ++txtnum) {
+        debug_printf("txt %d: key: %s value: %s\n", txtnum, MDNS.txtKey(i,txtnum).c_str(), MDNS.txt(i,txtnum).c_str());
+      }
+
       if (MDNS.hasTxt(i,"jmri")) {
-        String node = MDNS.txt(i,"node");
-        node.toLowerCase();
-        if (foundWitServersNames[i].equals(node)) {
-          foundWitServersNames[i] = "JMRI  (v" + MDNS.txt(i,"jmri") + ")";
-        }
+        foundWitServersNames[i] = MDNS.instanceName(i);
       }
     }
   }
@@ -1050,8 +1048,8 @@ void browseWitService() {
       debug_print("  "); debug_print(i); debug_print(": '"); debug_print(foundWitServersNames[i]);
       debug_print("' ("); debug_print(foundWitServersIPs[i]); debug_print(":"); debug_print(foundWitServersPorts[i]); debug_println(")");
       if (i<5) {  // only have room for 5
-        String truncatedIp = ".." + foundWitServersIPs[i].toString().substring(foundWitServersIPs[i].toString().lastIndexOf("."));
-        oledText[i] = String(i) + ": " + truncatedIp + ":" + String(foundWitServersPorts[i]) + " " + foundWitServersNames[i];
+        //String truncatedIp = ".." + foundWitServersIPs[i].toString().substring(foundWitServersIPs[i].toString().lastIndexOf("."));
+        oledText[i] = String(i) + ": " + foundWitServersNames[i] + " (" + foundWitServersIPs[i].toString() + ":" + String(foundWitServersPorts[i]) + ")";
       }
     }
 
@@ -2163,6 +2161,10 @@ void doKeyPress(char key, bool pressed) {
             witConnectionState = CONNECTION_STATE_ENTRY_REQUIRED;
             buildWitEntry();
             enterWitServer();
+            break;
+          case '*': // refresh
+            MDNS.begin("WiTcontroller");
+            witConnectionState = CONNECTION_STATE_DISCONNECTED;
             break;
           default:  // do nothing 
             break;
