@@ -1018,7 +1018,7 @@ void browseWitService() {
       }
 
       if (MDNS.hasTxt(i,"jmri")) {
-        foundWitServersNames[i] = MDNS.instanceName(i);
+        foundWitServersNames[i] =  "jmri/" + MDNS.instanceName(i);
       }
     }
   }
@@ -1048,8 +1048,11 @@ void browseWitService() {
       debug_print("  "); debug_print(i); debug_print(": '"); debug_print(foundWitServersNames[i]);
       debug_print("' ("); debug_print(foundWitServersIPs[i]); debug_print(":"); debug_print(foundWitServersPorts[i]); debug_println(")");
       if (i<5) {  // only have room for 5
-        //String truncatedIp = ".." + foundWitServersIPs[i].toString().substring(foundWitServersIPs[i].toString().lastIndexOf("."));
-        oledText[i] = String(i) + ": " + foundWitServersNames[i] + " (" + foundWitServersIPs[i].toString() + ":" + String(foundWitServersPorts[i]) + ")";
+        String oledTextLine = String(i) + ": " + foundWitServersNames[i] + " (" + foundWitServersIPs[i].toString() + ":" + String(foundWitServersPorts[i]) + ")";
+        if(oledTextLine.length()>34) {
+          oledTextLine = oledTextLine.substring(0,31) + "...";
+        }
+        oledText[i] = oledTextLine;
       }
     }
 
@@ -1976,7 +1979,7 @@ void loop() {
     } else {
       static unsigned long lastCheck = 0;
 
-      if (millis() - lastCheck >= 100) {
+      if (millis() - lastCheck >= 50) {
         lastCheck = millis();
         wiThrottleProtocol.check();
       }
