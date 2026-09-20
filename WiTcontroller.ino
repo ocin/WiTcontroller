@@ -3207,6 +3207,13 @@ void changeDirection(int multiThrottleIndex, Direction direction) {
       wiThrottleProtocol.setDirection(multiThrottleChar, leadLoco, direction);
     } 
   }
+
+  // If config enabled, set speed to 0 when changing direction
+  if(speedZeroOnDirectionChange) {
+    debug_println("changeDirection(): speed set to 0 on direction change");
+    speedSet(multiThrottleIndex, 0);
+  }
+
   writeOledSpeed();
   // debug_println("changeDirection(): end "); 
 }
