@@ -1,4 +1,4 @@
-const String appVersion = "v1.113";
+const String appVersion = "v1.116";
 #ifndef CUSTOM_APPNAME
    const String appName = "WiTcontroller";
 #else
@@ -333,6 +333,9 @@ const int glyph_speed_step = 0x00d6;
 
 #define MAX_FUNCTIONS 32
 
+#ifndef CONSIST_RELEASE_BY_INDEX
+   #define CONSIST_RELEASE_BY_INDEX true
+#endif
 
 #ifndef MENU_ITEM_TEXT_TITLE_FUNCTION
    #define MENU_ITEM_TEXT_TITLE_FUNCTION               "Function"
@@ -378,7 +381,7 @@ const int glyph_speed_step = 0x00d6;
    #define MENU_ITEM_TEXT_MENU_FUNCTION               "no+# Select   * Cancel  # List"
 #endif
 #ifndef MENU_ITEM_TEXT_MENU_ADD_LOCO
-   #define MENU_ITEM_TEXT_MENU_ADD_LOCO               "addr+# Add  * Cancel  # Roster"
+   #define MENU_ITEM_TEXT_MENU_ADD_LOCO               "addr+# Add * Cancel # Roster"
 #endif
 #ifndef MENU_ITEM_TEXT_MENU_DROP_LOCO
    #define MENU_ITEM_TEXT_MENU_DROP_LOCO              "addr+# One   * Cancel    # All"
@@ -386,7 +389,7 @@ const int glyph_speed_step = 0x00d6;
 #ifndef MENU_ITEM_TEXT_MENU_DROP_LOCO_BY_INDEX
    #define MENU_ITEM_TEXT_MENU_DROP_LOCO_BY_INDEX     "no+# One     * Cancel    # All"
 #endif
-#if DROP_LOCO_BY_INDEX
+#if CONSIST_RELEASE_BY_INDEX
    #define MENU_ITEM_TEXT_MENU_DROP_LOCO_REAL MENU_ITEM_TEXT_MENU_DROP_LOCO_BY_INDEX
 #else
    #define MENU_ITEM_TEXT_MENU_DROP_LOCO_REAL MENU_ITEM_TEXT_MENU_DROP_LOCO
@@ -898,8 +901,8 @@ const char ssidPasswordBlankChar = 164;
 #endif
 
 // *******************************************************************************************************************
-// additional / optional commands
-//  these can be any legigitmate WiThrottle protocol command
+// Additional / optional commands
+// These can be any legitimate WiThrottle protocol command
 // refer to https://www.jmri.org/help/en/package/jmri/jmrit/withrottle/Protocol.shtml
 
 #ifndef CUSTOM_COMMAND_1
@@ -934,6 +937,47 @@ const char ssidPasswordBlankChar = 164;
 #endif 
 #ifndef CUSTOM_COMMAND_11
    #define CUSTOM_COMMAND_11 ""
+#endif 
+
+
+// *******************************************************************************************************************
+// Additional / optional menu select commands
+// These can be any legitimate menu character sequence.  It can only be one command.
+// e.g. "*1" will open the add loco menu screen
+// e.g. "*1999#" will select loco 999 and return you to the throttle screen
+
+#ifndef CUSTOM_MENU_SELECT_COMMAND_1
+   #define CUSTOM_MENU_SELECT_COMMAND_1 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_2
+   #define CUSTOM_MENU_SELECT_COMMAND_2 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_3
+   #define CUSTOM_MENU_SELECT_COMMAND_3 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_4
+   #define CUSTOM_MENU_SELECT_COMMAND_4 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_5
+   #define CUSTOM_MENU_SELECT_COMMAND_5 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_6
+   #define CUSTOM_MENU_SELECT_COMMAND_6 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_7
+   #define CUSTOM_MENU_SELECT_COMMAND_7 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_8
+   #define CUSTOM_MENU_SELECT_COMMAND_8 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_9
+   #define CUSTOM_MENU_SELECT_COMMAND_9 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_10
+   #define CUSTOM_MENU_SELECT_COMMAND_10 ""
+#endif 
+#ifndef CUSTOM_MENU_SELECT_COMMAND_11
+   #define CUSTOM_MENU_SELECT_COMMAND_11 ""
 #endif 
 
 // *******************************************************************************************************************
@@ -1257,10 +1301,6 @@ const char ssidPasswordBlankChar = 164;
    #define RESTORE_ACQUIRED_LOCOS true
 #endif
 
-#ifndef CONSIST_RELEASE_BY_INDEX
-   #define CONSIST_RELEASE_BY_INDEX true
-#endif
-
 // ***************************************************
 // function search
 
@@ -1305,6 +1345,14 @@ const char ssidPasswordBlankChar = 164;
 
 #ifndef GESTURE_PARTNER_WINDOW
    #define GESTURE_PARTNER_WINDOW 250
+#endif
+
+#ifndef GUEST_MODE_ALLOW_DIRECT_KEYBOARD_COMMANDS
+   #define GUEST_MODE_ALLOW_DIRECT_KEYBOARD_COMMANDS false
+#endif
+
+#ifndef GUEST_MODE_ALLOW_NEXT_THROTTLE
+   #define GUEST_MODE_ALLOW_NEXT_THROTTLE true
 #endif
 
 // ***************************************************

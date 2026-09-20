@@ -1,19 +1,29 @@
-//
+// **********************************************************************
 // DO NOT alter this file
-// 
+// **********************************************************************
 
 #define FUNCTION_NULL -1 // do nothing
 
 #define FUNCTION_0 0 // lights
+#define FUNCTION_00 0 // lights
 #define FUNCTION_1 1 // bell
+#define FUNCTION_01 1 // bell
 #define FUNCTION_2 2 // horn
+#define FUNCTION_02 2 // horn
 #define FUNCTION_3 3
+#define FUNCTION_03 3
 #define FUNCTION_4 4
+#define FUNCTION_04 4
 #define FUNCTION_5 5
+#define FUNCTION_05 5
 #define FUNCTION_6 6
+#define FUNCTION_06 6
 #define FUNCTION_7 7
+#define FUNCTION_07 7
 #define FUNCTION_8 8
+#define FUNCTION_08 8
 #define FUNCTION_9 9
+#define FUNCTION_09 9
 #define FUNCTION_10 10
 #define FUNCTION_11 11
 #define FUNCTION_12 12
@@ -56,7 +66,9 @@
 #define MAX_THROTTLE_INCREASE 56
 #define MAX_THROTTLE_DECREASE 57
 
+// **********************************************************************
 // actions that are not related to a loco need to be above 500
+// **********************************************************************
 
 #define POWER_TOGGLE 501
 #define POWER_ON 502
@@ -86,12 +98,30 @@
 #define CUSTOM_10 530
 #define CUSTOM_11 531
 
+#define CUSTOM_MENU_SELECT_1 532
+#define CUSTOM_MENU_SELECT_2 533
+#define CUSTOM_MENU_SELECT_3 534
+#define CUSTOM_MENU_SELECT_4 535
+#define CUSTOM_MENU_SELECT_5 536
+#define CUSTOM_MENU_SELECT_6 537
+#define CUSTOM_MENU_SELECT_7 538
+#define CUSTOM_MENU_SELECT_8 539
+#define CUSTOM_MENU_SELECT_9 540
+#define CUSTOM_MENU_SELECT_10 542
+#define CUSTOM_MENU_SELECT_11 543
+
+// **********************************************************************
 // search functions
+// **********************************************************************
 // these can only be assigned to 'additional buttons' and not to the keypad or encoder button
+
 #define HORN_OR_WHISTLE_SEARCH 600
 #define WHISTLE_SEARCH 601
 #define HORN_SEARCH 602
 #define BRAKE_SEARCH 603
 
+// **********************************************************************
 // reserved for custom search commands
 // 900 - 999
+
+// **********************************************************************

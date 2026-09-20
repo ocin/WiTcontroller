@@ -108,7 +108,7 @@
 // By default, # will show the list above. 
 //   true = will take you to the Loco Function Labels screen directly
 //   false = will take you to the Key Definitions
-// The Defualt is false
+// The Default is false
 
 // #define HASH_SHOWS_FUNCTIONS_INSTEAD_OF_KEY_DEFS         false
 
@@ -191,6 +191,25 @@
 // #define CUSTOM_COMMAND_9 ""
 // #define CUSTOM_COMMAND_10 ""
 // #define CUSTOM_COMMAND_11 ""
+
+// *******************************************************************************************************************
+// Additional / optional menu select commands
+// These can be any legitimate menu character sequence.  It can be multiple commands.
+// e.g. "*1" will open the add loco menu screen
+// e.g. "*1999#" will select loco 999 and return you to the throttle screen
+// e.g. "*2#*1888#*1999#" will drop the current locos, then select locos 888 and 999 and return you to the throttle screen
+
+// #define CUSTOM_MENU_SELECT_COMMAND_1 "*1"
+// #define CUSTOM_MENU_SELECT_COMMAND_2 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_3 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_4 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_5 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_6 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_7 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_8 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_9 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_10 ""
+// #define CUSTOM_MENU_SELECT_COMMAND_11 ""
 
 // ********************************************************************************************
 // oLED definition
@@ -278,7 +297,7 @@
 
 // Keypad configuration
 // Play with these values if you see the keys bounce (activate twice on a single press)
-// Times are in miliseconds
+// Times are in milliseconds
 
 // #define KEYPAD_DEBOUNCE_TIME 10
 // #define KEYPAD_HOLD_TIME 200
@@ -400,68 +419,22 @@
 // must be 1 or greater
 //    #define NEW_MAX_ADDITIONAL_BUTTONS 11
 
-//    #define NEW_ADDITIONAL_BUTTON_ACTIONS {\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL,\
-                            FUNCTION_NULL\
-                            }
+//    #define NEW_ADDITIONAL_BUTTON_ACTIONS  { FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL, FUNCTION_NULL }
 
-//    #define NEW_ADDITIONAL_BUTTON_LATCHING {\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true,\
-                            true\
-                            }
+// Only relevant for the buttons that are set to FUNCTION_0 to FUNCTION_32
+// Either 'true' = LATCHING or 'false' = NOT LATCHING
+//    #define NEW_ADDITIONAL_BUTTON_LATCHING {          true,          true,          true,          true,          true,          true,          true,          true,          true,          true,          true }
 
 // Set the pin value to -1 to skip that value.
 // For pins on the ESP32 use the number shown on the board/diagram
 // If you are using pins on a I2C GPIO Expansion board, they will be numbered: 0-15
 //
-//    #define NEW_ADDITIONAL_BUTTON_PIN {\
-                            5,\
-                            15,\
-                            25,\
-                            26,\
-                            27,\
-                            32,\
-                            33,\
-                            34,\
-                            35,\
-                            36,\
-                            39\
-                            }
+//    #define NEW_ADDITIONAL_BUTTON_PIN      {             5,             15,            25,            26,            27,           32,             33,            34,           35,            36,            39 }
 
 // Set to either INPUT_PULLUP or INPUT.  If INPUT, the pin will need an external pullup resister (e.g. 10k)
 // Pins 34,35,36,39 can be used but don't have an internal pullup, so use INPUT for these
 //
-//    #define NEW_ADDITIONAL_BUTTON_TYPE {\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT_PULLUP,\
-                            INPUT,\
-                            INPUT,\
-                            INPUT,\
-                            INPUT\
-                            }
+//    #define NEW_ADDITIONAL_BUTTON_TYPE     {  INPUT_PULLUP,   INPUT_PULLUP,   INPUT_PULLUP,  INPUT_PULLUP,  INPUT_PULLUP,  INPUT_PULLUP,  INPUT_PULLUP,         INPUT,        INPUT,         INPUT,         INPUT }
 
 // *******************************************************************************************************************
 // Throttle Pot
@@ -522,7 +495,7 @@
 // By default, to release a single loco from a consist/mu, you must enter the address of the loco
 // Uncomment this line if you wish to release locos by just entering the index number (1-8) of 
 // the loco in the consist
-// #define DROP_LOCO_BY_INDEX true
+// #define CONSIST_RELEASE_BY_INDEX true
 
 // *******************************************************************************************************************
 // Translations
@@ -556,8 +529,8 @@
 // ******************
 
 // Direction Indication Font override (not recommended other than for use of Chinese characters)
-// Any font from here can be used https://github.com/olikraus/u8g2/wiki/fntlist8#8-pixel-height
-// The default one is 29px high
+// Any font from here can be used https://github.com/olikraus/u8g2/wiki/fntlist12
+// The default one is 9px high
 // Uncomment if and change to the appropriate font if required
 // #define FONT_DIRECTION u8g2_font_neuecraft_tr
 
@@ -648,8 +621,16 @@
 // #define GUEST_MODE_PIN_1 41
 // #define GUEST_MODE_PIN_2 42
 
-// optional  defaults to disabled (-1)
+// optional defaults to disabled (-1)
 // #define GUEST_MODE_LED_PIN 2
 
 // #define GUEST_MODE_HOLD_DURATION 1000
 // #define GESTURE_PARTNER_WINDOW 250
+
+// optionally allow access to the direct keypad commands. .i.e. everything except '*'
+// defaults to false
+// #define GUEST_MODE_ALLOW_DIRECT_KEYBOARD_COMMANDS true
+
+// optionally allow access to the other throttles (NEXT_THROTTLE)
+// defaults to false
+// #define GUEST_MODE_ALLOW_NEXT_THROTTLE true
