@@ -1302,3 +1302,10 @@ const char ssidPasswordBlankChar = 164;
 #ifndef GESTURE_PARTNER_WINDOW
    #define GESTURE_PARTNER_WINDOW 250
 #endif
+
+// ***************************************************
+// Set speed to 0 when direction is changed.
+
+#ifndef SPEED_ZERO_ON_DIRECTION_CHANGE
+   #define SPEED_ZERO_ON_DIRECTION_CHANGE false
+#endif
