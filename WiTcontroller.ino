@@ -980,7 +980,7 @@ void browseWitService() {
   oledText[1] = selectedSsid;   oledText[2] = MSG_BROWSING_FOR_SERVICE;
   writeOledBattery();
   writeOledArray(false, false, true, true);
-
+  
   startWaitForSelection = millis();
 
   noOfWitServices = 0;
@@ -3179,7 +3179,6 @@ void changeDirection(int multiThrottleIndex, Direction direction) {
     if (locoCount == 1) {
       debug_println("changeDirection(): one loco");
       wiThrottleProtocol.setDirection(multiThrottleChar, direction);  // change all
-
     } else {
       debug_println("changeDirection(): multiple locos");
       leadLoco = wiThrottleProtocol.getLeadLocomotive(multiThrottleChar);
