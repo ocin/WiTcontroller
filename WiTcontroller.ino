@@ -1981,7 +1981,7 @@ void loop() {
     } else {
       static unsigned long lastCheck = 0;
 
-      if (millis() - lastCheck >= 50) {
+      if (millis() - lastCheck >= 100) {
         lastCheck = millis();
         wiThrottleProtocol.check();
       }
@@ -3179,12 +3179,6 @@ void changeDirection(int multiThrottleIndex, Direction direction) {
     if (locoCount == 1) {
       debug_println("changeDirection(): one loco");
       wiThrottleProtocol.setDirection(multiThrottleChar, direction);  // change all
-
-      // Set speed to 0 if configured to do so when changing direction
-      if(speedZeroOnDirectionChange) {
-        debug_println("changeDirection(): speed set to 0 on direction change");
-        speedSet(multiThrottleIndex, 0);
-      }
 
     } else {
       debug_println("changeDirection(): multiple locos");
