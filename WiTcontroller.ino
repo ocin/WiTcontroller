@@ -3059,7 +3059,11 @@ String getDisplayLocoString(int multiThrottleIndex, int index) {
     for (int i = 0; i < maxRoster; i++) {
       if (String(rosterAddress[i]) == locoNumber) {
         if (rosterName[i] != "") {
+          #ifdef USE_BATTERY_TEST 
+          locoNumber = rosterName[i].substring(0, 18);
+          #else
           locoNumber = rosterName[i];
+          #endif
         }
         break;
       }
