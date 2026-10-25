@@ -4110,10 +4110,10 @@ void writeOledArray(bool isThreeColums, bool isPassword, bool sendBuffer, bool d
   }
 
   if (drawTopLine) {
-    u8g2.drawHLine(0,11,128);
+    u8g2.drawHLine(0,11,u8g2.getDisplayWidth()-2);
     writeOledBattery();
   }
-  u8g2.drawHLine(0,51,128);
+  u8g2.drawHLine(0,51,u8g2.getDisplayWidth()-2);
 
   if (sendBuffer) u8g2.sendBuffer();					// transfer internal memory to the display
   // debug_println("writeOledArray(): end ");
