@@ -711,10 +711,12 @@ void browseSsids() { // show the found SSIDs
 
     if ((foundSsidsCount>0) && (autoConnectToFirstDefinedServer)) {
       for (int i=0; i<foundSsidsCount; i++) { 
-        if (foundSsids[i] == ssids[0]) {
-          ssidConnectionState = CONNECTION_STATE_SELECTED;
-          selectedSsid = foundSsids[i];
-          getSsidPasswordAndWitIpForFound();
+        for (int j = 0; j < maxSsids; j++) {
+          if (foundSsids[i] == ssids[j]) {
+            ssidConnectionState = CONNECTION_STATE_SELECTED;
+            selectedSsid = foundSsids[i];
+            getSsidPasswordAndWitIpForFound();
+          }
         }
       }
     }
